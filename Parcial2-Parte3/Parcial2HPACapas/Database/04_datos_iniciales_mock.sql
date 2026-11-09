@@ -3,16 +3,18 @@
 -- Proposito: Cargar datos de prueba (mockups).
 -- Ejecutar DESPUES de 03.
 --
--- IMPORTANTE (usuarios): el hash y el salt fueron generados con el MISMO
--- algoritmo de la aplicacion:
---     hash = Base64( SHA256( UTF8( salt + contrasena ) ) )
+-- IMPORTANTE (usuarios): el hash fue generado con BCrypt por la MISMA clase
+-- de la aplicacion (BCryptHashService, factor de trabajo 11):
+--     salt = BCrypt.GenerateSalt(11)
+--     hash = BCrypt.HashPassword(contrasena, salt)
+-- El login lo comprueba con BCrypt.Verify(contrasena, hash).
 -- Credenciales de prueba (correo / contrasena):
 --     admin@utp.ac.pa     / Admin123*     (rol Administrador)
 --     usuario@utp.ac.pa   / Usuario123*   (rol Usuario)
 --     invitado@utp.ac.pa  / Invitado123*  (rol Invitado)
 -- =====================================================================
 
-USE parcial2_hpa;
+USE parcial2_hpa3;
 
 -- Limpieza para poder re-ejecutar (respeta llaves foraneas).
 DELETE FROM login_historial;
@@ -30,11 +32,11 @@ ALTER TABLE empleados   AUTO_INCREMENT = 1;
 ALTER TABLE clientes    AUTO_INCREMENT = 1;
 ALTER TABLE usuarios    AUTO_INCREMENT = 1;
 
--- Usuarios (hash y salt precalculados, coinciden con Sha256HashService)
+-- Usuarios (hash BCrypt precalculado con BCryptHashService)
 INSERT INTO usuarios (nombre, correo, password_hash, salt, rol, activo) VALUES
-('Administrador',       'admin@utp.ac.pa',    '1yOK3nxMVwC3r1TfxBKEGiw1CHtRcQpbbrEfPqJY0U8=', 'Y1I0cHMyMDI2U2FsdEFkbQ==', 'Administrador', 1),
-('Usuario de Prueba',   'usuario@utp.ac.pa',  'MmWwETMsKnrvja11dMByePeebx6II2qygh15tGfxDcg=', 'Y1I0cHMyMDI2U2FsdFVzcg==', 'Usuario',       1),
-('Usuario Invitado',    'invitado@utp.ac.pa', 'i1uthv9a7zPKdAxdTmjf+/zbOjUkhvg/4QU3FwgAXnw=', 'Y1I0cHMyMDI2U2FsdEludg==', 'Invitado',      1);
+('Administrador',       'admin@utp.ac.pa',    '$2a$11$quByvJc41Piz2N55Re8xF.91bGY6KTnkGURgOaspvEdZFw9ytSKBK', '$2a$11$quByvJc41Piz2N55Re8xF.', 'Administrador', 1),
+('Usuario de Prueba',   'usuario@utp.ac.pa',  '$2a$11$N.Q3C8uwtmNkHNRwRVSCf.aIHLsqXewBfySVNpTpZYKWS79L.gPjW', '$2a$11$N.Q3C8uwtmNkHNRwRVSCf.', 'Usuario',       1),
+('Usuario Invitado',    'invitado@utp.ac.pa', '$2a$11$zX11JxuiwF3v7rYdG5sPOe2OiJXlDzd5ULRgynjp9aGy9bEsAh/zK', '$2a$11$zX11JxuiwF3v7rYdG5sPOe', 'Invitado',      1);
 
 -- Clientes
 INSERT INTO clientes (nombre, correo, telefono, activo) VALUES

@@ -22,13 +22,13 @@ DROP USER IF EXISTS 'app_hpa'@'localhost';
 CREATE USER 'app_hpa'@'localhost' IDENTIFIED BY 'AppHpa2026!';
 
 -- Permiso EXECUTE solo sobre los procedimientos que usa la aplicacion.
-GRANT EXECUTE ON PROCEDURE parcial2_hpa.sp_obtener_usuario_por_correo TO 'app_hpa'@'localhost';
-GRANT EXECUTE ON PROCEDURE parcial2_hpa.sp_registrar_usuario           TO 'app_hpa'@'localhost';
-GRANT EXECUTE ON PROCEDURE parcial2_hpa.sp_dashboard_resumen           TO 'app_hpa'@'localhost';
-GRANT EXECUTE ON PROCEDURE parcial2_hpa.sp_listar_pedidos              TO 'app_hpa'@'localhost';
-GRANT EXECUTE ON PROCEDURE parcial2_hpa.sp_listar_ultimos_pedidos      TO 'app_hpa'@'localhost';
-GRANT EXECUTE ON PROCEDURE parcial2_hpa.sp_login_historial             TO 'app_hpa'@'localhost';
-GRANT EXECUTE ON PROCEDURE parcial2_hpa.sp_login_historial_insertar    TO 'app_hpa'@'localhost';
+GRANT EXECUTE ON PROCEDURE parcial2_hpa3.sp_obtener_usuario_por_correo TO 'app_hpa'@'localhost';
+GRANT EXECUTE ON PROCEDURE parcial2_hpa3.sp_registrar_usuario           TO 'app_hpa'@'localhost';
+GRANT EXECUTE ON PROCEDURE parcial2_hpa3.sp_dashboard_resumen           TO 'app_hpa'@'localhost';
+GRANT EXECUTE ON PROCEDURE parcial2_hpa3.sp_listar_pedidos              TO 'app_hpa'@'localhost';
+GRANT EXECUTE ON PROCEDURE parcial2_hpa3.sp_listar_ultimos_pedidos      TO 'app_hpa'@'localhost';
+GRANT EXECUTE ON PROCEDURE parcial2_hpa3.sp_login_historial             TO 'app_hpa'@'localhost';
+GRANT EXECUTE ON PROCEDURE parcial2_hpa3.sp_login_historial_insertar	TO 'app_hpa'@'localhost';
 
 FLUSH PRIVILEGES;
 

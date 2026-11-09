@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using Parcial2HPACapas.Datos;
 using Parcial2HPACapas.Entidades;
@@ -98,16 +99,27 @@ namespace Parcial2HPACapas.Negocio
             }
         }
 
-        /// <summary>Devuelve la IPv4 local del equipo (o 127.0.0.1 si no hay).</summary>
+        /// <summary>
+        /// Devuelve la IPv4 de la red local del equipo. Prefiere una interfaz
+        /// activa con puerta de enlace (la red real), para no tomar la de una
+        /// VPN o adaptador virtual. Si no hay ninguna, devuelve 127.0.0.1.
+        /// </summary>
         private static string ObtenerIpLocal()
         {
             try
             {
-                IPAddress ip = Dns.GetHostAddresses(Dns.GetHostName())
+                IPAddress ip = NetworkInterface.GetAllNetworkInterfaces()
+                    .Where(n => n.OperationalStatus == OperationalStatus.Up
+                             && n.NetworkInterfaceType != NetworkInterfaceType.Loopback)
+                    .Select(n => n.GetIPProperties())
+                    .Where(p => p.GatewayAddresses.Any(g => g.Address.AddressFamily == AddressFamily.InterNetwork))
+                    .SelectMany(p => p.UnicastAddresses)
+                    .Select(u => u.Address)
                     .FirstOrDefault(a => a.AddressFamily == AddressFamily.InterNetwork);
+
                 return ip?.ToString() ?? "127.0.0.1";
             }
-            catch (SocketException)
+            catch (NetworkInformationException)
             {
                 return "127.0.0.1";
             }

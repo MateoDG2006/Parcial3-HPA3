@@ -4,7 +4,7 @@
 -- Ejecutar DESPUES de 01. Representa la "Capa de Entidades" en la BD.
 -- =====================================================================
 
-USE parcial2_hpa;
+USE parcial2_hpa3;
 
 -- Se eliminan en orden inverso de dependencias para poder re-ejecutar el script.
 DROP TABLE IF EXISTS login_historial;   -- depende de usuarios: se borra primero
@@ -16,7 +16,7 @@ DROP TABLE IF EXISTS clientes;
 DROP TABLE IF EXISTS usuarios;
 
 -- Usuarios del sistema (login). NUNCA se guarda la contrasena en texto plano:
--- se guarda el hash (SHA-256 en Base64) y el salt que lo acompana.
+-- se guarda el hash BCrypt (60 caracteres, incluye el salt) y el salt aparte.
 CREATE TABLE usuarios (
     id             INT AUTO_INCREMENT PRIMARY KEY,
     nombre         VARCHAR(120)  NOT NULL,

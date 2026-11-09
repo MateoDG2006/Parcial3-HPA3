@@ -5,8 +5,8 @@
 -- (por ejemplo root) SOLO para la instalacion.
 -- =====================================================================
 
-CREATE DATABASE IF NOT EXISTS parcial2_hpa
+CREATE DATABASE IF NOT EXISTS parcial2_hpa3
     CHARACTER SET utf8mb4
     COLLATE utf8mb4_unicode_ci;
 
-USE parcial2_hpa;
+USE parcial2_hpa3;

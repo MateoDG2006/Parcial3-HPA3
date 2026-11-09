@@ -7,9 +7,13 @@
 -- del creador (administrador). Asi el usuario de la aplicacion solo necesita
 -- permiso EXECUTE sobre estos procedimientos y NO acceso directo a las tablas
 -- (principio de privilegios minimos).
+--
+-- IMPORTANTE: al borrar un procedimiento (DROP PROCEDURE) MySQL elimina
+-- tambien sus permisos. Cada vez que se re-ejecute este script hay que
+-- volver a ejecutar 05_crear_usuario_privilegios_minimos.sql.
 -- =====================================================================
 
-USE parcial2_hpa;
+USE parcial2_hpa3;
 
 DROP PROCEDURE IF EXISTS sp_obtener_usuario_por_correo;
 DROP PROCEDURE IF EXISTS sp_registrar_usuario;

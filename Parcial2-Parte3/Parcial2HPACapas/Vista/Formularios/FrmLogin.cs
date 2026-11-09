@@ -19,13 +19,13 @@ namespace Parcial2HPACapas.Vista.Formularios
 
         /// <summary>
         /// Construye la Vista y "cablea" el patron MVP: una sola implementacion
-        /// (<see cref="Sha256HashService"/>) cubre los dos contratos de hash.
+        /// (<see cref="BCryptHashService"/>) cubre los dos contratos de hash.
         /// </summary>
         public FrmLogin()
         {
             InitializeComponent();
 
-            var hashService = new Sha256HashService();
+            var hashService = new BCryptHashService();
             var autenticacionService = new AutenticacionService(
                 new UsuarioRepositorio(), hashService, hashService);
 
@@ -69,6 +69,11 @@ namespace Parcial2HPACapas.Vista.Formularios
         /// <inheritdoc/>
         public void AutenticacionCorrecta(Usuario usuario)
         {
+            // Acceso exitoso: se indica el nombre del usuario autenticado.
+            MessageBox.Show(
+                "Bienvenido, " + usuario.Nombre + ".",
+                "Acceso concedido", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             // Oculta el login y abre el tablero (MDI) de forma modal.
             Hide();
             using (var dashboard = new FrmDashboard())

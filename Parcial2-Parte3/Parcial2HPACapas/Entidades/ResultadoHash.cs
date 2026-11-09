@@ -7,10 +7,10 @@ namespace Parcial2HPACapas.Entidades
     /// </summary>
     public class ResultadoHash
     {
-        /// <summary>Hash de la contrasena en Base64.</summary>
+        /// <summary>Hash BCrypt de la contrasena (incluye version, costo y salt).</summary>
         public string Hash { get; set; }
 
-        /// <summary>Salt aleatorio en Base64 usado al generar el hash.</summary>
+        /// <summary>Salt aleatorio generado por BCrypt al crear el hash.</summary>
         public string Salt { get; set; }
 
         /// <summary>Crea un resultado de hash con su salt asociado.</summary>

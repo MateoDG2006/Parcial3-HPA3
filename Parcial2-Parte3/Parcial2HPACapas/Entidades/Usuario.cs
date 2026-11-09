@@ -19,10 +19,10 @@ namespace Parcial2HPACapas.Entidades
         /// <summary>Nombre completo mostrado en la interfaz.</summary>
         public string Nombre { get; set; }
 
-        /// <summary>Hash de la contrasena (resultado de SHA-256 en Base64).</summary>
+        /// <summary>Hash BCrypt de la contrasena (formato "$2a$11$...").</summary>
         public string PasswordHash { get; set; }
 
-        /// <summary>Salt aleatorio (Base64) usado para generar y verificar el hash.</summary>
+        /// <summary>Salt generado por BCrypt (tambien va dentro del hash).</summary>
         public string Salt { get; set; }
 
         /// <summary>Rol del usuario (Administrador, Usuario, Invitado, etc.).</summary>

@@ -37,10 +37,15 @@ namespace Parcial2HPACapas.Vista.Presentadores
                 Sesion.UsuarioActual = usuario;
                 _vista.AutenticacionCorrecta(usuario);
             }
+            catch (AutenticacionService.LoginFailure ex)
+            {
+                // Validaciones y credenciales incorrectas: mensaje pensado para el usuario
+                _vista.MostrarMensaje(ex.Message);
+            }
             catch (Exception ex)
             {
-                // Validaciones y errores de autenticacion llegan aqui
-                _vista.MostrarMensaje(ex.Message);
+                // Errores tecnicos (conexion a la BD, permisos, configuracion)
+                _vista.MostrarMensaje("No se pudo conectar con la base de datos. Detalle: " + ex.Message);
             }
             finally
             {
